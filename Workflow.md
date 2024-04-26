@@ -17,6 +17,11 @@ npm run clean
 npm run build
 ```
 
+### Run CLI test command after build
+```bash
+./dist/main.cli.js --test
+```
+
 #### Run REPL
 
 ```bash
@@ -30,3 +35,5 @@ Run `ts-node` to directly run TS code with NodeJS without compiling
 ```bash
 npm start
 ```
+
+
