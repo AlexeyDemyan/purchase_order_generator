@@ -11,7 +11,8 @@
     "clean": "rimraf dist",
     "ts": "ts-node",
     "mock:server": "json-server ./mocks/mock-server-data.json --port 3123",
-    "test-date": "ts-node ./src/libs/date-generator.ts"
+    "test-date": "ts-node ./src/libs/date-generator.ts",
+    "test-data-write": "npm run ts ./dist/main.cli.ts --getdata ./output/output-data.txt http://localhost:3123/api"
   },
   "devDependencies": {
     "@types/node": "18.17.17",

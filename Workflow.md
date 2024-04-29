@@ -22,6 +22,11 @@ npm run build
 ./dist/main.cli.js --test
 ```
 
+### Run test file write after build and mock-server init
+```bash
+./dist/main.cli.js --getdata ./output/output-data.txt http://localhost:3123/api
+```
+
 #### Run REPL
 
 ```bash
