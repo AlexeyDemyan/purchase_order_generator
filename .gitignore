@@ -6,6 +6,7 @@
 /docs/
 .idea/*
 /output/
+/mocks/
 
 
 .DS_Store
