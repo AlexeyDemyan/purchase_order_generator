@@ -1,7 +1,9 @@
-import { RestApplication } from "./rest/index.js";
+import { RestApplication, RestConfig } from "./rest/index.js";
 
 async function bootstrap() {
-  const restApplication = new RestApplication();
+  const config = new RestConfig();
+
+  const restApplication = new RestApplication(config);
   await restApplication.init();
 }
 

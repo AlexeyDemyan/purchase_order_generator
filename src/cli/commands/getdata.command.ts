@@ -1,6 +1,6 @@
 import got from "got";
 import { appendFile } from "node:fs";
-import { Command } from "../../types_and_interfaces/command.interface.js";
+import { Command } from "../../types_and_interfaces/index.js";
 import { MockServerData } from "../../types_and_interfaces/index.js";
 import { MockServerDataConverter } from "../../libs/index.js";
 
