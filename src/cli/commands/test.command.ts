@@ -1,4 +1,4 @@
-import { Command } from "./command.interface.js";
+import { Command } from "../../types_and_interfaces/command.interface.js";
 
 export class TestCommand implements Command {
   public getName(): string {

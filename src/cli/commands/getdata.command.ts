@@ -1,7 +1,7 @@
 import got from "got";
 import { appendFile } from "node:fs";
-import { Command } from "./command.interface.js";
-import { MockServerData } from "../../types/index.js";
+import { Command } from "../../types_and_interfaces/command.interface.js";
+import { MockServerData } from "../../types_and_interfaces/index.js";
 import { MockServerDataConverter } from "../../libs/index.js";
 
 export class GetDataCommand implements Command {

@@ -1,4 +1,4 @@
-import { MockServerData } from "../types/index.js";
+import { MockServerData } from "../types_and_interfaces/index.js";
 
 export class MockServerDataConverter {
   constructor(private readonly mockData: MockServerData) {}
