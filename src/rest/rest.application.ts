@@ -1,5 +1,6 @@
 import { Config } from "../types_and_interfaces/index.js";
 import { MongoDatabaseClient } from "./mongo.database-client.js";
+import { PurchaseOrderEntryModel } from "../schemas/purchase-order-entry.model.js";
 
 export class RestApplication {
   constructor(
@@ -20,5 +21,11 @@ export class RestApplication {
     console.info('Initializing database...');
     await this._initDB();
     console.info(`Initialized database`);
+
+    const poEntry = await PurchaseOrderEntryModel.create({
+      orderNumber: 69
+    });
+
+    console.info(`attempted to create ${poEntry}`)
   }
 }
