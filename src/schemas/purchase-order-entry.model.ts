@@ -3,12 +3,19 @@ import { PurchaseOrderEntry } from "../types_and_interfaces/purchase-order-entry
 
 export interface PurchaseOrderEntryDocument
   extends PurchaseOrderEntry,
-    Document {}
+  Document {
+    createdAt: Date,
+    updatedAt: Date,
+  }
 
 // gonna write simple types for now
 
 const purchaseOrderEntrySchema = new Schema({
-  orderNumber: Number,
+  orderNumber: {
+    type: Number,
+    unique: true,
+    index: true,
+  },
   user: String,
   company: String,
   date: Date,
@@ -23,7 +30,7 @@ const purchaseOrderEntrySchema = new Schema({
   discount: Number,
   netTotalValue: Number,
   priceIncludesVAT: Boolean,
-});
+}, {timestamps: true});
 
 export const PurchaseOrderEntryModel = model<PurchaseOrderEntryDocument>(
   "Purchase Order Entry",
