@@ -1,6 +1,7 @@
 import { Config } from "../types_and_interfaces/index.js";
 import { MongoDatabaseClient } from "./mongo.database-client.js";
 import { PurchaseOrderEntryModel } from "../schemas/purchase-order-entry.model.js";
+import { mockEntry } from "./mock-entry.js";
 
 export class RestApplication {
   constructor(
@@ -35,6 +36,8 @@ export class RestApplication {
       const newOrderNumber = highestOrderNumber + 1;
       const newPoEntry = await PurchaseOrderEntryModel.create({
         orderNumber: newOrderNumber,
+        user: mockEntry.user,
+        company: mockEntry.company,
       });
       console.log(`Newest PO entry is: ${newPoEntry}`);
     }
