@@ -23,7 +23,9 @@ export class RestApplication {
     console.info(`Initialized database`);
 
     const entryWithHighestNumber = await PurchaseOrderEntryModel.findOne().sort(
-      { orderNumber: -1 }
+      {
+        orderNumber: -1,
+      }
     );
     console.log(`item with highest order number is ${entryWithHighestNumber}`);
 
@@ -34,7 +36,7 @@ export class RestApplication {
       const newPoEntry = await PurchaseOrderEntryModel.create({
         orderNumber: newOrderNumber,
       });
-      console.log(newPoEntry);
+      console.log(`Newest PO entry is: ${newPoEntry}`);
     }
   }
 }
