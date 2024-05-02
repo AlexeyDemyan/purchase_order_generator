@@ -1,15 +1,18 @@
 import express, { Express } from "express";
 import { Config } from "../types_and_interfaces/index.js";
-import { MongoDatabaseClient } from "./mongo.database-client.js";
+// import { MongoDatabaseClient } from "./mongo.database-client.js";
+import { DatabaseClient } from "../types_and_interfaces/index.js";
 import { PurchaseOrderEntryModel } from "../schemas/purchase-order-entry.model.js";
 import { mockEntry } from "./mock-entry.js";
+// import { POEntryController } from "./po-entry-controller.js";
 
 export class RestApplication {
   private server: Express;
 
   constructor(
     private readonly config: Config,
-    private readonly mongoDatabaseClient: MongoDatabaseClient
+    private readonly mongoDatabaseClient: DatabaseClient,
+    // private readonly poEntryController: POEntryController
   ) {
     this.server = express();
   }
@@ -24,6 +27,10 @@ export class RestApplication {
     const port = this.config.get("PORT");
     this.server.listen(port);
   }
+
+  // private async _initControllers(){
+
+  // }
 
   public async init() {
     console.info("Rest App initialized");

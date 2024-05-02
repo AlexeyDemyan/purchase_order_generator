@@ -43,10 +43,12 @@ export class POEntryController implements Controller {
   }
 
   public index(req: Request, res: Response): void {
-    // index handler
+    console.log(req);
+    console.log(res)
   }
 
   public create(req: Request, res: Response): void {
-    // create handler
+    console.log(req);
+    console.log(res)
   }
 }

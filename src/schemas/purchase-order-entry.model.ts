@@ -33,6 +33,6 @@ const purchaseOrderEntrySchema = new Schema({
 }, {timestamps: true});
 
 export const PurchaseOrderEntryModel = model<PurchaseOrderEntryDocument>(
-  "Purchase Order Entry",
+  "PO_Entry",
   purchaseOrderEntrySchema
 );
