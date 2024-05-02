@@ -1,6 +1,10 @@
 import { StatusCodes } from "http-status-codes";
-import { Response, Router } from "express";
-import { Route, Controller } from "../types_and_interfaces/index.js";
+import { Response, Request, Router } from "express";
+import {
+  Route,
+  Controller,
+  HttpMethod,
+} from "../types_and_interfaces/index.js";
 
 const DEFAULT_CONTENT_TYPE = "application/json";
 
@@ -9,6 +13,9 @@ export class POEntryController implements Controller {
 
   constructor() {
     this._router = Router();
+
+    this.addRoute({ path: "/", method: HttpMethod.Get, handler: this.index });
+    this.addRoute({ path: "/", method: HttpMethod.Post, handler: this.create });
   }
 
   get router() {
@@ -33,5 +40,13 @@ export class POEntryController implements Controller {
 
   public ok<T>(res: Response, data: T): void {
     this.send(res, StatusCodes.OK, data);
+  }
+
+  public index(req: Request, res: Response): void {
+    // index handler
+  }
+
+  public create(req: Request, res: Response): void {
+    // create handler
   }
 }
