@@ -20,8 +20,8 @@ export class RestApplication {
     this.mongoDatabaseClient.connect(mongoURI as string);
   }
 
-  private async _initServer(){
-    const port = this.config.get('PORT');
+  private async _initServer() {
+    const port = this.config.get("PORT");
     this.server.listen(port);
   }
 
@@ -33,9 +33,15 @@ export class RestApplication {
     await this._initDB();
     console.info(`Initialized database`);
 
-    console.info('Initializing server...');
+    console.info("Initializing server...");
     await this._initServer();
-    console.info(`Server started on http://localhost:${this.config.get('PORT')}`)
+    console.info(
+      `Server started on http://localhost:${this.config.get("PORT")}`
+    );
+
+    this.server.get("/", (_req, res) => {
+      res.send("Kif ahna");
+    });
 
     const entryWithHighestNumber = await PurchaseOrderEntryModel.findOne().sort(
       {
