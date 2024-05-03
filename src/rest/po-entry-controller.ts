@@ -5,6 +5,7 @@ import {
   Controller,
   HttpMethod,
 } from "../types_and_interfaces/index.js";
+import { PurchaseOrderEntryModel } from "../schemas/purchase-order-entry.model.js";
 
 const DEFAULT_CONTENT_TYPE = "application/json";
 
@@ -42,13 +43,13 @@ export class POEntryController implements Controller {
     this.send(res, StatusCodes.OK, data);
   }
 
-  public index(req: Request, res: Response): void {
-    console.log(req);
-    console.log(res)
+  public async index(_req: Request, res: Response): Promise<void> {
+    const po_entries = await PurchaseOrderEntryModel.find();
+    this.ok(res, po_entries);
   }
 
   public create(req: Request, res: Response): void {
     console.log(req);
-    console.log(res)
+    console.log(res);
   }
 }
