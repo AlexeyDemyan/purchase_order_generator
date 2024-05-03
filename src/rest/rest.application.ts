@@ -1,4 +1,5 @@
 import express, { Express } from "express";
+import cors from "cors";
 import { Config } from "../types_and_interfaces/index.js";
 import { DatabaseClient } from "../types_and_interfaces/index.js";
 import { PurchaseOrderEntryModel } from "../schemas/purchase-order-entry.model.js";
@@ -33,6 +34,7 @@ export class RestApplication {
 
   public async _initMiddleware() {
     this.server.use(express.json());
+    this.server.use(cors());
   }
 
   public async init() {
