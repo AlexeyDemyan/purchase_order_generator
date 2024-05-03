@@ -6,6 +6,9 @@ import {
   HttpMethod,
 } from "../types_and_interfaces/index.js";
 import { PurchaseOrderEntryModel } from "../schemas/purchase-order-entry.model.js";
+import { fillDTO } from "../libs/index.js";
+import { POEntryRdo } from "./po-entry.rdo.js";
+// import { CreatePOEntryDto } from "./create-po-entry.dto.js";
 
 const DEFAULT_CONTENT_TYPE = "application/json";
 
@@ -45,7 +48,8 @@ export class POEntryController implements Controller {
 
   public async index(_req: Request, res: Response): Promise<void> {
     const po_entries = await PurchaseOrderEntryModel.find();
-    this.ok(res, po_entries);
+    const responseData = fillDTO(POEntryRdo, po_entries);
+    this.ok(res, responseData);
   }
 
   public create(req: Request, res: Response): void {

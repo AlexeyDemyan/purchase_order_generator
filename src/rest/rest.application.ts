@@ -31,6 +31,10 @@ export class RestApplication {
     this.server.use("/po_entries", this.poEntryController.router);
   }
 
+  public async _initMiddleware() {
+    this.server.use(express.json());
+  }
+
   public async init() {
     console.info("Rest App initialized");
     console.info(`Value of PORT from env: ${this.config.get("PORT")}`);
@@ -39,9 +43,13 @@ export class RestApplication {
     await this._initDB();
     console.info(`Initialized database`);
 
+    console.info("Initializing middleware...");
+    await this._initMiddleware();
+    console.info("App-level Middleware initialized");
+
     console.info("Initializing controller(s)...");
     await this._initControllers();
-    console.info("Controller(s) initialized")
+    console.info("Controller(s) initialized");
 
     console.info("Initializing server...");
     await this._initServer();
