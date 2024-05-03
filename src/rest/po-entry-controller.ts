@@ -8,7 +8,7 @@ import {
 import { PurchaseOrderEntryModel } from "../schemas/purchase-order-entry.model.js";
 import { fillDTO } from "../libs/index.js";
 import { POEntryRdo } from "./po-entry.rdo.js";
-// import { CreatePOEntryDto } from "./create-po-entry.dto.js";
+import { CreatePOEntryDto } from "./create-po-entry.dto.js";
 
 const DEFAULT_CONTENT_TYPE = "application/json";
 
@@ -52,8 +52,29 @@ export class POEntryController implements Controller {
     this.ok(res, responseData);
   }
 
-  public create(req: Request, res: Response): void {
-    console.log(req);
-    console.log(res);
+  public async create(
+    {
+      body,
+    }: Request<
+      Record<string, unknown>,
+      Record<string, unknown>,
+      CreatePOEntryDto
+    >,
+    res: Response
+  ): Promise<void> {
+    const entryWithHighestNumber = await PurchaseOrderEntryModel.findOne().sort(
+      {
+        orderNumber: -1,
+      }
+    );
+
+    const highestOrderNumber = entryWithHighestNumber?.orderNumber;
+
+    if (highestOrderNumber) {
+      const newOrderNumber = highestOrderNumber + 1;
+      body.orderNumber = newOrderNumber;
+      const newPoEntry = await PurchaseOrderEntryModel.create(body);
+      this.created(res, fillDTO(POEntryRdo, newPoEntry));
+    }
   }
 }
