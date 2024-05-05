@@ -68,7 +68,14 @@ export class POEntryController implements Controller {
 
     if (highestOrderNumber) {
       const newOrderNumber = highestOrderNumber + 1;
+
+      // let newObj = {name: };
+      // body.forEach((value: string, key: string) => newObj[key] = value);
+      // let newObjToJson = JSON.stringify(newObj)
+
       body.orderNumber = newOrderNumber;
+      body.company = 'Company_xmampany';
+      // console.log(Object.keys(body))
       const newPoEntry = await PurchaseOrderEntryModel.create(body);
       this.created(res, newPoEntry);
     }

@@ -2,8 +2,8 @@ import express, { Express } from "express";
 import cors from "cors";
 import { Config } from "../types_and_interfaces/index.js";
 import { DatabaseClient } from "../types_and_interfaces/index.js";
-import { PurchaseOrderEntryModel } from "../schemas/purchase-order-entry.model.js";
-import { mockEntry } from "./mock-entry.js";
+// import { PurchaseOrderEntryModel } from "../schemas/purchase-order-entry.model.js";
+// import { mockEntry } from "./mock-entry.js";
 import { Controller } from "../types_and_interfaces/index.js";
 
 export class RestApplication {
@@ -34,7 +34,8 @@ export class RestApplication {
 
   public async _initMiddleware() {
     this.server.use(express.json());
-    this.server.use(cors());
+    this.server.use(cors({origin: "http://localhost:3000"}));
+    // this.server.use(express.urlencoded({ extended: false }));
   }
 
   public async init() {
@@ -63,23 +64,27 @@ export class RestApplication {
       res.send("Kif ahna");
     });
 
-    const entryWithHighestNumber = await PurchaseOrderEntryModel.findOne().sort(
-      {
-        orderNumber: -1,
-      }
-    );
-    console.log(`item with highest order number is ${entryWithHighestNumber}`);
+    this.server.post("/form", (req) => {
+      console.log(req.body);
+    });
 
-    const highestOrderNumber = entryWithHighestNumber?.orderNumber;
+    // const entryWithHighestNumber = await PurchaseOrderEntryModel.findOne().sort(
+    //   {
+    //     orderNumber: -1,
+    //   }
+    // );
+    // console.log(`item with highest order number is ${entryWithHighestNumber}`);
 
-    if (highestOrderNumber) {
-      const newOrderNumber = highestOrderNumber + 1;
-      const newPoEntry = await PurchaseOrderEntryModel.create({
-        orderNumber: newOrderNumber,
-        user: mockEntry.user,
-        company: mockEntry.company,
-      });
-      console.log(`Newest PO entry is: ${newPoEntry}`);
-    }
+    // const highestOrderNumber = entryWithHighestNumber?.orderNumber;
+
+    // if (highestOrderNumber) {
+    //   const newOrderNumber = highestOrderNumber + 1;
+    //   const newPoEntry = await PurchaseOrderEntryModel.create({
+    //     orderNumber: newOrderNumber,
+    //     user: mockEntry.user,
+    //     company: mockEntry.company,
+    //   });
+    //   console.log(`Newest PO entry is: ${newPoEntry}`);
+    // }
   }
 }
