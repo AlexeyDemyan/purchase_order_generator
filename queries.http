@@ -7,7 +7,7 @@ Content-Type: application/json
 GET http://localhost:3333/ HTTP/1.1
 
 ## Adding new PO Entry
-POST http://localhost:3000/po_entries HTTP/1.1
+POST http://localhost:3333/po_entries HTTP/1.1
 Content-Type: application/json
 
 {
