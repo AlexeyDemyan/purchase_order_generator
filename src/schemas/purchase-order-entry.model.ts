@@ -29,7 +29,7 @@ const purchaseOrderEntrySchema = new Schema({
   otherRemarks: String,
   discount: Number,
   netTotalValue: Number,
-  priceIncludesVAT: Boolean,
+  priceIncludesVAT: String,
 }, {timestamps: true});
 
 export const PurchaseOrderEntryModel = model<PurchaseOrderEntryDocument>(
