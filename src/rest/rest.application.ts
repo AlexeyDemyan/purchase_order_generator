@@ -64,6 +64,11 @@ export class RestApplication {
       res.send("Kif ahna");
     });
 
+    this.server.get("/print", (req, res) => {
+      console.log(req);
+      res.send(`<h1>Orrajt</h1><br><br><h3>${res}</h3>`);
+    })
+
     this.server.post("/form", (req) => {
       console.log(req.body);
     });
