@@ -17,5 +17,5 @@ export type PurchaseOrderEntry = {
   otherRemarks?: string;
   discount: number;
   netTotalValue: number;
-  priceIncludesVAT: string;
+  priceIncludesVat: 'Yes' | 'No';
 };
