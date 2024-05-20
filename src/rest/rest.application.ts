@@ -34,7 +34,7 @@ export class RestApplication {
 
   public async _initMiddleware() {
     this.server.use(express.json());
-    this.server.use(cors({origin: "http://localhost:3000"}));
+    this.server.use(cors({ origin: "http://localhost:3000" }));
     // this.server.use(express.urlencoded({ extended: false }));
   }
 
@@ -54,7 +54,7 @@ export class RestApplication {
     await this._initControllers();
     console.info("Controller(s) initialized");
 
-    console.info("Initializing server...");
+    console.info("Initializing server.....");
     await this._initServer();
     console.info(
       `Server started on http://localhost:${this.config.get("PORT")}`
@@ -67,7 +67,11 @@ export class RestApplication {
     this.server.get("/print", (req, res) => {
       console.log(req);
       res.send(`<h1>Orrajt</h1><br><br><h3>${res}</h3>`);
-    })
+    });
+
+    // this.server.get(`print/:id`, (_req,res) => {
+    //   console.log(res);
+    // })
 
     this.server.post("/form", (req) => {
       console.log(req.body);
