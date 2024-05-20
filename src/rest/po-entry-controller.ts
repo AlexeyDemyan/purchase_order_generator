@@ -17,6 +17,11 @@ export class POEntryController implements Controller {
 
     this.addRoute({ path: "/", method: HttpMethod.Get, handler: this.index });
     this.addRoute({ path: "/", method: HttpMethod.Post, handler: this.create });
+    this.addRoute({
+      path: "/print:orderNumber",
+      method: HttpMethod.Get,
+      handler: this.createPrint,
+    });
   }
 
   get router() {
@@ -49,13 +54,21 @@ export class POEntryController implements Controller {
     this.ok(res, responseData);
   }
 
+  public async createPrint(req: Request, res: Response): Promise<void> {
+    const searchePOEntry = await PurchaseOrderEntryModel.findOne({
+      orderNumber: req.params.orderNumber,
+    });
+    if (searchePOEntry) {
+      res
+        .type("html")
+        .send(
+          `<h1>Orrajt</h1><br><br><h3>${searchePOEntry.supplier}</h3><h2></h2>`
+        );
+    }
+  }
+
   public async create(
-    {
-      body,
-    }: Request<
-      Record<string, unknown>,
-      Record<string, unknown>
-    >,
+    { body }: Request<Record<string, unknown>, Record<string, unknown>>,
     res: Response
   ): Promise<void> {
     const entryWithHighestNumber = await PurchaseOrderEntryModel.findOne().sort(
