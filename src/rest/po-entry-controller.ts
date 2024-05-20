@@ -6,6 +6,7 @@ import {
   HttpMethod,
 } from "../types_and_interfaces/index.js";
 import { PurchaseOrderEntryModel } from "../schemas/purchase-order-entry.model.js";
+import { printRender } from "./print-render.js";
 
 const DEFAULT_CONTENT_TYPE = "application/json";
 
@@ -59,11 +60,8 @@ export class POEntryController implements Controller {
       orderNumber: req.params.orderNumber,
     });
     if (searchePOEntry) {
-      res
-        .type("html")
-        .send(
-          `<h1>Orrajt</h1><br><br><h3>${searchePOEntry.supplier}</h3><h2></h2>`
-        );
+      const printTemplate = printRender(searchePOEntry);
+      res.type("html").send(printTemplate);
     }
   }
 
