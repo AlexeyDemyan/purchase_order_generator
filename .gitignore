@@ -6,6 +6,7 @@
 /docs/
 .idea/*
 /output/
+/static/
 
 
 .DS_Store

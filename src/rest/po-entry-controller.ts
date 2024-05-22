@@ -60,7 +60,7 @@ export class POEntryController implements Controller {
       orderNumber: req.params.orderNumber,
     });
     if (searchePOEntry) {
-      const printTemplate = printRender(searchePOEntry);
+      const printTemplate = printRender(searchePOEntry, searchePOEntry.createdAt);
       res.type("html").send(printTemplate);
     }
   }
