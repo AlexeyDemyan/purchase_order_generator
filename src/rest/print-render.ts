@@ -83,21 +83,21 @@ export const printRender = (poEntry: PurchaseOrderEntry, createdDate: Date) => {
     priceIncludesVat,
   } = poEntryInfo;
 
-  const isCompanyOne = () => {
+  const isMarsovinWinery = () => {
     if (company === "Marsovin Winery Ltd") {
       return "&#10004;";
     }
     return "";
   };
 
-  const isCompanyTwo = () => {
+  const isCassarCamilleriMarketing = () => {
     if (company === "CassarCamilleri Marketing, Sales & Distribution Ltd") {
       return "&#10004;";
     }
     return "";
   };
 
-  const isCompanyThree = () => {
+  const isViticulture = () => {
     if (company === "Marsovin Viticulture Ltd") {
       return "&#10004;";
     }
@@ -358,19 +358,19 @@ export const printRender = (poEntry: PurchaseOrderEntry, createdDate: Date) => {
         <ul>
           <li>
             <div class="company">Marsovin Winery Ltd</div>
-            <div class="tickbox">${isCompanyOne()}</div>
+            <div class="tickbox">${isMarsovinWinery()}</div>
             <div class="vat">VAT No: MT 1002-2806</div>
           </li>
           <li>
             <div class="company">
               CassarCamilleri Marketing, Sales & Distribution Ltd
             </div>
-            <div class="tickbox">${isCompanyTwo()}</div>
+            <div class="tickbox">${isCassarCamilleriMarketing()}</div>
             <div class="vat">VAT No: MT 1432-0606</div>
           </li>
           <li>
             <div class="company">Marsovin Viticulture Ltd</div>
-            <div class="tickbox">${isCompanyThree()}</div>
+            <div class="tickbox">${isViticulture()}</div>
             <div class="vat">VAT No: MT 1373-8006</div>
           </li>
         </ul>
