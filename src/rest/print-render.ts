@@ -84,21 +84,21 @@ export const printRender = (poEntry: PurchaseOrderEntry, createdDate: Date) => {
   } = poEntryInfo;
 
   const isCompanyOne = () => {
-    if (company === "Company_1") {
+    if (company === "Marsovin Winery Ltd") {
       return "&#10004;";
     }
     return "";
   };
 
   const isCompanyTwo = () => {
-    if (company === "Company_2") {
+    if (company === "CassarCamilleri Marketing, Sales & Distribution Ltd") {
       return "&#10004;";
     }
     return "";
   };
 
   const isCompanyThree = () => {
-    if (company === "Company_3") {
+    if (company === "Marsovin Viticulture Ltd") {
       return "&#10004;";
     }
     return "";
