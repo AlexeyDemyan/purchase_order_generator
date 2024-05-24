@@ -1,5 +1,5 @@
 import { PurchaseOrderEntry } from "../types_and_interfaces/purchase-order-entry/purchase-order-entry.type.js";
-import { OrderLine } from "../types_and_interfaces/purchase-order-entry/order-line.type.js";
+// import { OrderLine } from "../types_and_interfaces/purchase-order-entry/order-line.type.js";
 
 const returnValueOnlyIfApplicable = (value: any) => {
   if (value === null || value === undefined) {
@@ -8,15 +8,15 @@ const returnValueOnlyIfApplicable = (value: any) => {
   return value;
 };
 
-const oneLineStringified = (line: OrderLine) => {
-  return {
-    product: returnValueOnlyIfApplicable(line.product),
-    supplierRef: returnValueOnlyIfApplicable(line.supplierRef),
-    quantity: returnValueOnlyIfApplicable(line.quantity),
-    unitPrice: returnValueOnlyIfApplicable(line.unitPrice),
-    totalPrice: returnValueOnlyIfApplicable(line.totalPrice),
-  };
-};
+// const oneLineStringified = (line: OrderLine) => {
+//   return {
+//     product: returnValueOnlyIfApplicable(line.product),
+//     supplierRef: returnValueOnlyIfApplicable(line.supplierRef),
+//     quantity: returnValueOnlyIfApplicable(line.quantity),
+//     unitPrice: returnValueOnlyIfApplicable(line.unitPrice),
+//     totalPrice: returnValueOnlyIfApplicable(line.totalPrice),
+//   };
+// };
 
 // const prepareOrderLines = (lines: OrderLine[]) => {
 //   const orderLinesStringified = [];
@@ -27,19 +27,19 @@ const oneLineStringified = (line: OrderLine) => {
 
 export const printRender = (poEntry: PurchaseOrderEntry, createdDate: Date) => {
   const poEntryInfo = {
-    company: poEntry.company,
-    date: returnValueOnlyIfApplicable(poEntry.date),
-    supplier: returnValueOnlyIfApplicable(poEntry.supplier),
-    supplierAddress: returnValueOnlyIfApplicable(poEntry.supplierAddress),
-    supplierCode: returnValueOnlyIfApplicable(poEntry.supplierCode),
-    deliveryDate: returnValueOnlyIfApplicable(poEntry.deliveryDate),
-    order: returnValueOnlyIfApplicable(poEntry.order),
-    orderLine: oneLineStringified(poEntry.orderLines[0]),
-    paymentTerms: returnValueOnlyIfApplicable(poEntry.paymentTerms),
-    otherRemarks: returnValueOnlyIfApplicable(poEntry.otherRemarks),
-    discount: returnValueOnlyIfApplicable(poEntry.discount),
-    netTotalValue: returnValueOnlyIfApplicable(poEntry.netTotalValue),
-    priceIncludesVat: returnValueOnlyIfApplicable(poEntry.priceIncludesVat),
+    company: poEntry.company?.toString(),
+    date: returnValueOnlyIfApplicable(poEntry.date?.getDate()),
+    supplier: returnValueOnlyIfApplicable(poEntry.supplier?.toString()),
+    supplierAddress: returnValueOnlyIfApplicable(poEntry.supplierAddress?.toString()),
+    supplierCode: returnValueOnlyIfApplicable(poEntry.supplierCode?.toString()),
+    deliveryDate: returnValueOnlyIfApplicable(poEntry.deliveryDate?.getDate()),
+    order: returnValueOnlyIfApplicable(poEntry.order?.toString()),
+    //orderLine: oneLineStringified(poEntry.orderLines[0]),
+    paymentTerms: returnValueOnlyIfApplicable(poEntry.paymentTerms?.toString()),
+    otherRemarks: returnValueOnlyIfApplicable(poEntry.otherRemarks?.toString()),
+    discount: returnValueOnlyIfApplicable(poEntry.discount?.toString()),
+    netTotalValue: returnValueOnlyIfApplicable(poEntry.netTotalValue?.toString()),
+    priceIncludesVat: returnValueOnlyIfApplicable(poEntry.priceIncludesVat?.toString()),
   };
 
   const {
@@ -50,7 +50,7 @@ export const printRender = (poEntry: PurchaseOrderEntry, createdDate: Date) => {
     supplierCode,
     deliveryDate,
     order,
-    orderLine,
+    //orderLine,
     paymentTerms,
     otherRemarks,
     discount,
@@ -170,6 +170,7 @@ export const printRender = (poEntry: PurchaseOrderEntry, createdDate: Date) => {
       display: flex;
       justify-content: flex-start;
       align-items: center;
+      margin-bottom: 10px;
     }
 
     .section__company-list ul li div {
@@ -182,8 +183,8 @@ export const printRender = (poEntry: PurchaseOrderEntry, createdDate: Date) => {
     }
 
     .tickbox {
-      height: 10px;
-      width: 10px;
+      height: 20px;
+      width: 20px;
       border: 2px solid black;
     }
 
@@ -385,11 +386,11 @@ export const printRender = (poEntry: PurchaseOrderEntry, createdDate: Date) => {
             <th>Total Price</th>
           </tr>
           <tr class="table-row-1">
-            <td>${orderLine.product}</td>
-            <td>${orderLine.supplierRef}</td>
-            <td>${orderLine.quantity}</td>
-            <td>${orderLine.unitPrice}</td>
-            <td>${orderLine.totalPrice}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
           <tr class="table-row-2">
             <td></td>
@@ -483,20 +484,6 @@ export const printRender = (poEntry: PurchaseOrderEntry, createdDate: Date) => {
             <td></td>
           </tr>
           <tr class="table-row-15">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="table-row-16">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="table-row-17">
             <td></td>
             <td></td>
             <td></td>

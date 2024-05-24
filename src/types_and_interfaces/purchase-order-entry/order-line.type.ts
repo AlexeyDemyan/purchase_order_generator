@@ -1,5 +1,5 @@
 export type OrderLine = {
-  product: string;
+  product?: string;
   supplierRef?: string;
   quantity?: number;
   unitPrice?: number;

@@ -10,7 +10,7 @@ export type PurchaseOrderEntry = {
   supplier: string;
   supplierAddress: string;
   supplierCode?: string;
-  deliveryDate?: Date | string;
+  deliveryDate?: Date;
   order?: string;
   orderLines: OrderLine[];
   paymentTerms?: string;
