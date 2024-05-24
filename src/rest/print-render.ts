@@ -1,5 +1,16 @@
 import { PurchaseOrderEntry } from "../types_and_interfaces/purchase-order-entry/purchase-order-entry.type.js";
-// import { OrderLine } from "../types_and_interfaces/purchase-order-entry/order-line.type.js";
+import { OrderLine } from "../types_and_interfaces/purchase-order-entry/order-line.type.js";
+import { OrderLineStringified } from "../types_and_interfaces/purchase-order-entry/order-line-stringified.js";
+
+const maxAmountOfLines = 14;
+
+const emptyLine: OrderLineStringified = {
+  product: "",
+  supplierRef: "",
+  quantity: "",
+  unitPrice: "",
+  totalPrice: "",
+};
 
 const returnValueOnlyIfApplicable = (value: any) => {
   if (value === null || value === undefined) {
@@ -8,38 +19,52 @@ const returnValueOnlyIfApplicable = (value: any) => {
   return value;
 };
 
-// const oneLineStringified = (line: OrderLine) => {
-//   return {
-//     product: returnValueOnlyIfApplicable(line.product),
-//     supplierRef: returnValueOnlyIfApplicable(line.supplierRef),
-//     quantity: returnValueOnlyIfApplicable(line.quantity),
-//     unitPrice: returnValueOnlyIfApplicable(line.unitPrice),
-//     totalPrice: returnValueOnlyIfApplicable(line.totalPrice),
-//   };
-// };
+const oneLineStringified = (line: OrderLine) => {
+  if (line) {
+    return {
+      product: returnValueOnlyIfApplicable(line.product?.toString()),
+      supplierRef: returnValueOnlyIfApplicable(line.supplierRef?.toString()),
+      quantity: returnValueOnlyIfApplicable(line.quantity?.toString()),
+      unitPrice: returnValueOnlyIfApplicable(line.unitPrice?.toString()),
+      totalPrice: returnValueOnlyIfApplicable(line.totalPrice?.toString()),
+    };
+  }
+  return emptyLine;
+};
 
-// const prepareOrderLines = (lines: OrderLine[]) => {
-//   const orderLinesStringified = [];
-//   lines.forEach((line) => {
-//     orderLinesStringified.push(oneLineStringified(line))
-//   });
-// };
+const prepareOrderLines = (lines: OrderLine[]) => {
+  const orderLinesStringified: OrderLineStringified[] = [];
+  for (let i = 0; i <= maxAmountOfLines; i++) {
+    if (lines[i]) {
+      orderLinesStringified.push(oneLineStringified(lines[i]));
+    } else {
+      orderLinesStringified.push(emptyLine);
+    }
+  }
+  return orderLinesStringified;
+};
 
 export const printRender = (poEntry: PurchaseOrderEntry, createdDate: Date) => {
   const poEntryInfo = {
     company: poEntry.company?.toString(),
     date: returnValueOnlyIfApplicable(poEntry.date?.getDate()),
     supplier: returnValueOnlyIfApplicable(poEntry.supplier?.toString()),
-    supplierAddress: returnValueOnlyIfApplicable(poEntry.supplierAddress?.toString()),
+    supplierAddress: returnValueOnlyIfApplicable(
+      poEntry.supplierAddress?.toString()
+    ),
     supplierCode: returnValueOnlyIfApplicable(poEntry.supplierCode?.toString()),
     deliveryDate: returnValueOnlyIfApplicable(poEntry.deliveryDate?.getDate()),
     order: returnValueOnlyIfApplicable(poEntry.order?.toString()),
-    //orderLine: oneLineStringified(poEntry.orderLines[0]),
+    orderLines: prepareOrderLines(poEntry.orderLines),
     paymentTerms: returnValueOnlyIfApplicable(poEntry.paymentTerms?.toString()),
     otherRemarks: returnValueOnlyIfApplicable(poEntry.otherRemarks?.toString()),
     discount: returnValueOnlyIfApplicable(poEntry.discount?.toString()),
-    netTotalValue: returnValueOnlyIfApplicable(poEntry.netTotalValue?.toString()),
-    priceIncludesVat: returnValueOnlyIfApplicable(poEntry.priceIncludesVat?.toString()),
+    netTotalValue: returnValueOnlyIfApplicable(
+      poEntry.netTotalValue?.toString()
+    ),
+    priceIncludesVat: returnValueOnlyIfApplicable(
+      poEntry.priceIncludesVat?.toString()
+    ),
   };
 
   const {
@@ -50,7 +75,7 @@ export const printRender = (poEntry: PurchaseOrderEntry, createdDate: Date) => {
     supplierCode,
     deliveryDate,
     order,
-    //orderLine,
+    orderLines,
     paymentTerms,
     otherRemarks,
     discount,
@@ -386,109 +411,109 @@ export const printRender = (poEntry: PurchaseOrderEntry, createdDate: Date) => {
             <th>Total Price</th>
           </tr>
           <tr class="table-row-1">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>${orderLines[0]?.product}</td>
+            <td>${orderLines[0]?.supplierRef}</td>
+            <td>${orderLines[0]?.quantity}</td>
+            <td>${orderLines[0]?.unitPrice}</td>
+            <td>${orderLines[0]?.totalPrice}</td>
           </tr>
           <tr class="table-row-2">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <td>${orderLines[1]?.product}</td>
+          <td>${orderLines[1]?.supplierRef}</td>
+          <td>${orderLines[1]?.quantity}</td>
+          <td>${orderLines[1]?.unitPrice}</td>
+          <td>${orderLines[1]?.totalPrice}</td>
           </tr>
           <tr class="table-row-3">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <td>${orderLines[2]?.product}</td>
+          <td>${orderLines[2]?.supplierRef}</td>
+          <td>${orderLines[2]?.quantity}</td>
+          <td>${orderLines[2]?.unitPrice}</td>
+          <td>${orderLines[2]?.totalPrice}</td>
           </tr>
           <tr class="table-row-4">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <td>${orderLines[3]?.product}</td>
+          <td>${orderLines[3]?.supplierRef}</td>
+          <td>${orderLines[3]?.quantity}</td>
+          <td>${orderLines[3]?.unitPrice}</td>
+          <td>${orderLines[3]?.totalPrice}</td>
           </tr>
           <tr class="table-row-5">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <td>${orderLines[4]?.product}</td>
+          <td>${orderLines[4]?.supplierRef}</td>
+          <td>${orderLines[4]?.quantity}</td>
+          <td>${orderLines[4]?.unitPrice}</td>
+          <td>${orderLines[4]?.totalPrice}</td>
           </tr>
           <tr class="table-row-6">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <td>${orderLines[5]?.product}</td>
+          <td>${orderLines[5]?.supplierRef}</td>
+          <td>${orderLines[5]?.quantity}</td>
+          <td>${orderLines[5]?.unitPrice}</td>
+          <td>${orderLines[5]?.totalPrice}</td>
           </tr>
           <tr class="table-row-7">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <td>${orderLines[6]?.product}</td>
+          <td>${orderLines[6]?.supplierRef}</td>
+          <td>${orderLines[6]?.quantity}</td>
+          <td>${orderLines[6]?.unitPrice}</td>
+          <td>${orderLines[6]?.totalPrice}</td>
           </tr>
           <tr class="table-row-8">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <td>${orderLines[7]?.product}</td>
+          <td>${orderLines[7]?.supplierRef}</td>
+          <td>${orderLines[7]?.quantity}</td>
+          <td>${orderLines[7]?.unitPrice}</td>
+          <td>${orderLines[7]?.totalPrice}</td>
           </tr>
           <tr class="table-row-9">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <td>${orderLines[8]?.product}</td>
+          <td>${orderLines[8]?.supplierRef}</td>
+          <td>${orderLines[8]?.quantity}</td>
+          <td>${orderLines[8]?.unitPrice}</td>
+          <td>${orderLines[8]?.totalPrice}</td>
           </tr>
-          <tr class="table-row-10">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr class="table-row-19">
+          <td>${orderLines[9]?.product}</td>
+          <td>${orderLines[9]?.supplierRef}</td>
+          <td>${orderLines[9]?.quantity}</td>
+          <td>${orderLines[9]?.unitPrice}</td>
+          <td>${orderLines[9]?.totalPrice}</td>
           </tr>
           <tr class="table-row-11">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <td>${orderLines[10]?.product}</td>
+          <td>${orderLines[10]?.supplierRef}</td>
+          <td>${orderLines[10]?.quantity}</td>
+          <td>${orderLines[10]?.unitPrice}</td>
+          <td>${orderLines[10]?.totalPrice}</td>
           </tr>
           <tr class="table-row-12">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <td>${orderLines[11]?.product}</td>
+          <td>${orderLines[11]?.supplierRef}</td>
+          <td>${orderLines[11]?.quantity}</td>
+          <td>${orderLines[11]?.unitPrice}</td>
+          <td>${orderLines[11]?.totalPrice}</td>
           </tr>
           <tr class="table-row-13">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <td>${orderLines[12]?.product}</td>
+          <td>${orderLines[12]?.supplierRef}</td>
+          <td>${orderLines[12]?.quantity}</td>
+          <td>${orderLines[12]?.unitPrice}</td>
+          <td>${orderLines[12]?.totalPrice}</td>
           </tr>
           <tr class="table-row-14">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <td>${orderLines[13]?.product}</td>
+          <td>${orderLines[13]?.supplierRef}</td>
+          <td>${orderLines[13]?.quantity}</td>
+          <td>${orderLines[13]?.unitPrice}</td>
+          <td>${orderLines[13]?.totalPrice}</td>
           </tr>
           <tr class="table-row-15">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <td>${orderLines[14]?.product}</td>
+          <td>${orderLines[14]?.supplierRef}</td>
+          <td>${orderLines[14]?.quantity}</td>
+          <td>${orderLines[14]?.unitPrice}</td>
+          <td>${orderLines[14]?.totalPrice}</td>
           </tr>
         </table>
       </div>
