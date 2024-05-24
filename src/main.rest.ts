@@ -3,6 +3,7 @@ import {
   RestConfig,
   POEntryController,
   MongoDatabaseClient,
+  UserController,
 } from "./rest/index.js";
 
 async function bootstrap() {
@@ -11,7 +12,8 @@ async function bootstrap() {
   const restApplication = new RestApplication(
     config,
     new MongoDatabaseClient(),
-    new POEntryController()
+    new POEntryController(),
+    new UserController()
   );
   await restApplication.init();
 }

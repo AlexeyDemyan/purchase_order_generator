@@ -12,7 +12,8 @@ export class RestApplication {
   constructor(
     private readonly config: Config,
     private readonly mongoDatabaseClient: DatabaseClient,
-    private readonly poEntryController: Controller
+    private readonly poEntryController: Controller,
+    private readonly userController: Controller,
   ) {
     this.server = express();
   }
@@ -30,6 +31,7 @@ export class RestApplication {
 
   private async _initControllers() {
     this.server.use("/po_entries", this.poEntryController.router);
+    this.server.use("/users", this.userController.router);
   }
 
   public async _initMiddleware() {
