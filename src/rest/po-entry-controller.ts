@@ -50,7 +50,11 @@ export class POEntryController implements Controller {
   }
 
   public async index(_req: Request, res: Response): Promise<void> {
-    const po_entries = await PurchaseOrderEntryModel.find();
+    const po_entries = await PurchaseOrderEntryModel.find().sort(
+      {
+        orderNumber: -1,
+      }
+    );
     const responseData = po_entries;
     this.ok(res, responseData);
   }
