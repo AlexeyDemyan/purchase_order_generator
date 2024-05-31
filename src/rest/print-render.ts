@@ -12,7 +12,7 @@ const emptyLine: OrderLineStringified = {
   totalPrice: "",
 };
 
-const returnValueOnlyIfApplicable = (value: any) => {
+function returnValueOnlyIfApplicable<T> (value: T) {
   if (value === null || value === undefined) {
     return "";
   }
@@ -47,13 +47,13 @@ const prepareOrderLines = (lines: OrderLine[]) => {
 export const printRender = (poEntry: PurchaseOrderEntry, createdDate: Date) => {
   const poEntryInfo = {
     company: poEntry.company?.toString(),
-    date: returnValueOnlyIfApplicable(poEntry.date?.getDate()),
+    date: returnValueOnlyIfApplicable(poEntry.date?.toLocaleDateString()),
     supplier: returnValueOnlyIfApplicable(poEntry.supplier?.toString()),
     supplierAddress: returnValueOnlyIfApplicable(
       poEntry.supplierAddress?.toString()
     ),
     supplierCode: returnValueOnlyIfApplicable(poEntry.supplierCode?.toString()),
-    deliveryDate: returnValueOnlyIfApplicable(poEntry.deliveryDate?.getDate()),
+    deliveryDate: returnValueOnlyIfApplicable(poEntry.deliveryDate?.toLocaleDateString()),
     order: returnValueOnlyIfApplicable(poEntry.order?.toString()),
     orderLines: prepareOrderLines(poEntry.orderLines),
     paymentTerms: returnValueOnlyIfApplicable(poEntry.paymentTerms?.toString()),
