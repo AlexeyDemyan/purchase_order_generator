@@ -23,6 +23,11 @@ export class POEntryController implements Controller {
       method: HttpMethod.Get,
       handler: this.createPrint,
     });
+    this.addRoute({
+      path: "/update",
+      method: HttpMethod.Put,
+      handler: this.update,
+    });
   }
 
   get router() {
@@ -50,11 +55,9 @@ export class POEntryController implements Controller {
   }
 
   public async index(_req: Request, res: Response): Promise<void> {
-    const po_entries = await PurchaseOrderEntryModel.find().sort(
-      {
-        orderNumber: -1,
-      }
-    );
+    const po_entries = await PurchaseOrderEntryModel.find().sort({
+      orderNumber: -1,
+    });
     const responseData = po_entries;
     this.ok(res, responseData);
   }
@@ -64,7 +67,10 @@ export class POEntryController implements Controller {
       orderNumber: req.params.orderNumber,
     });
     if (searchePOEntry) {
-      const printTemplate = printRender(searchePOEntry, searchePOEntry.createdAt);
+      const printTemplate = printRender(
+        searchePOEntry,
+        searchePOEntry.createdAt
+      );
       res.type("html").send(printTemplate);
     }
   }
@@ -88,6 +94,32 @@ export class POEntryController implements Controller {
 
       const newPoEntry = await PurchaseOrderEntryModel.create(body);
       this.created(res, newPoEntry);
+    }
+  }
+
+  public async update(
+    { body }: Request<Record<string, unknown>, Record<string, unknown>>,
+    res: Response
+  ): Promise<void> {
+    const searchedPOEntry = await PurchaseOrderEntryModel.findOne({
+      orderNumber: body.orderNumber,
+    });
+    if (searchedPOEntry) {
+      searchedPOEntry.user = body.user;
+      searchedPOEntry.company = body.company;
+      searchedPOEntry.date = body.date;
+      searchedPOEntry.supplier = body.supplier;
+      searchedPOEntry.supplierAddress = body.supplierAddress;
+      searchedPOEntry.supplierCode = body.supplierCode;
+      searchedPOEntry.deliveryDate = body.deliveryDate;
+      searchedPOEntry.orderLines = body.orderLines;
+      searchedPOEntry.paymentTerms = body.paymentTerms;
+      searchedPOEntry.otherRemarks = body.otherRemarks;
+      searchedPOEntry.discount = body.discount;
+      searchedPOEntry.netTotalValue = body.netTotalValue;
+      searchedPOEntry.priceIncludesVat = body.priceIncludesVat;
+      await searchedPOEntry.save();
+      this.ok(res, searchedPOEntry);
     }
   }
 }
