@@ -266,7 +266,7 @@ export const printRender = (poEntry: PurchaseOrderEntry, createdDate: Date) => {
     .section__bottom-info {
       display: grid;
       grid-template-columns: 500px 500px;
-      grid-template-rows: 50px 50px 80px;
+      grid-template-rows: 50px 50px 120px;
     }
 
     .section__bottom-info div {
@@ -500,20 +500,6 @@ export const printRender = (poEntry: PurchaseOrderEntry, createdDate: Date) => {
           <td>${orderLines[12]?.quantity}</td>
           <td>${orderLines[12]?.unitPrice}</td>
           <td>${orderLines[12]?.totalPrice}</td>
-          </tr>
-          <tr class="table-row-14">
-          <td>${orderLines[13]?.product}</td>
-          <td>${orderLines[13]?.supplierRef}</td>
-          <td>${orderLines[13]?.quantity}</td>
-          <td>${orderLines[13]?.unitPrice}</td>
-          <td>${orderLines[13]?.totalPrice}</td>
-          </tr>
-          <tr class="table-row-15">
-          <td>${orderLines[14]?.product}</td>
-          <td>${orderLines[14]?.supplierRef}</td>
-          <td>${orderLines[14]?.quantity}</td>
-          <td>${orderLines[14]?.unitPrice}</td>
-          <td>${orderLines[14]?.totalPrice}</td>
           </tr>
         </table>
       </div>
