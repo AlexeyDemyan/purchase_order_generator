@@ -266,7 +266,7 @@ export const printRender = (poEntry: PurchaseOrderEntry, createdDate: Date) => {
     .section__bottom-info {
       display: grid;
       grid-template-columns: 500px 500px;
-      grid-template-rows: 50px 50px 50px;
+      grid-template-rows: 50px 50px 80px;
     }
 
     .section__bottom-info div {
