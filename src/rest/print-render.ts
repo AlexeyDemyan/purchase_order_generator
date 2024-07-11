@@ -407,8 +407,8 @@ export const printRender = (poEntry: PurchaseOrderEntry, createdDate: Date) => {
             <th>Product</th>
             <th>Supplier Ref</th>
             <th>Quantity</th>
-            <th>Unit Price</th>
-            <th>Total Price</th>
+            <th>Unit Price &#8364;</th>
+            <th>Total Price &#8364;</th>
           </tr>
           <tr class="table-row-1">
             <td>${orderLines[0]?.product}</td>
