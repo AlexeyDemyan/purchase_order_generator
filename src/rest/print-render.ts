@@ -255,6 +255,10 @@ export const printRender = (poEntry: PurchaseOrderEntry, createdDate: Date) => {
       border: 3px solid black;
     }
 
+    .section__po-entry-lines table tr :first-child {
+      min-width: 400px;
+    }
+
     .section__po-entry-lines table td {
       height: 25px;
       text-align: center;
