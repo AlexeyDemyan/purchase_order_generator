@@ -12,12 +12,12 @@ const emptyLine: OrderLineStringified = {
   totalPrice: "",
 };
 
-function returnValueOnlyIfApplicable<T> (value: T) {
+function returnValueOnlyIfApplicable<T>(value: T) {
   if (value === null || value === undefined) {
     return "";
   }
   return value;
-};
+}
 
 const oneLineStringified = (line: OrderLine) => {
   if (line) {
@@ -44,16 +44,24 @@ const prepareOrderLines = (lines: OrderLine[]) => {
   return orderLinesStringified;
 };
 
+const formatDate = (date: Date | undefined) => {
+  if (date) {
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+  } else {
+    return null;
+  }
+};
+
 export const printRender = (poEntry: PurchaseOrderEntry, createdDate: Date) => {
   const poEntryInfo = {
     company: poEntry.company?.toString(),
-    date: returnValueOnlyIfApplicable(poEntry.date?.toLocaleDateString()),
+    date: returnValueOnlyIfApplicable(formatDate(poEntry.date)),
     supplier: returnValueOnlyIfApplicable(poEntry.supplier?.toString()),
     supplierAddress: returnValueOnlyIfApplicable(
       poEntry.supplierAddress?.toString()
     ),
     supplierCode: returnValueOnlyIfApplicable(poEntry.supplierCode?.toString()),
-    deliveryDate: returnValueOnlyIfApplicable(poEntry.deliveryDate?.toLocaleDateString()),
+    deliveryDate: returnValueOnlyIfApplicable(formatDate(poEntry.deliveryDate)),
     order: returnValueOnlyIfApplicable(poEntry.order?.toString()),
     orderLines: prepareOrderLines(poEntry.orderLines),
     paymentTerms: returnValueOnlyIfApplicable(poEntry.paymentTerms?.toString()),
